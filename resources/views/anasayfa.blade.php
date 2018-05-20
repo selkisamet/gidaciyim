@@ -1,5 +1,6 @@
 @extends('layouts.anasablon')
 @section('icerik')
+<!--Sayfa Başlangıcı-->
 <div class="col-lg-8">
 						<article>
 							<!-- Flexslider Başlangıç -->
@@ -49,4 +50,63 @@
 						</div>
 						<!-- Sayfalama Bitiş -->
 					</div>
+					<!--Sayfa Bitişi-->
+
+					<!--Yan Menü Başlangıç-->
+					<div class="col-lg-4">
+						<aside class="right-sidebar">
+							<div class="widget">
+								<form role="form">
+									<div class="form-group">
+										<input type="text" class="form-control" id="s" placeholder="Ne Aramıştınız...">
+									</div>
+								</form>
+							</div>
+							<div class="widget">
+								<h5 class="widgetheading">Kategoriler</h5>
+								<ul class="cat">
+									<li><i class="fa fa-angle-right"></i><a href="#">Kırmızı Et</a><span> (20)</span></li>
+									<li><i class="fa fa-angle-right"></i><a href="#">Beyaz Et</a><span> (11)</span></li>
+									<li><i class="fa fa-angle-right"></i><a href="#">Süt Ürünleri</a><span> (9)</span></li>
+									<li><i class="fa fa-angle-right"></i><a href="#">Katkı Maddeleri</a><span> (12)</span></li>
+									<li><i class="fa fa-angle-right"></i><a href="#">Dikkat Edilmesi Gerekenler</a><span> (18)</span></li>
+								</ul>
+							</div>
+							<div class="widget">
+								<h5 class="widgetheading">Son Paylaşımlar</h5>
+								<ul class="recent">
+									<li>
+										<img src="img/dummies/blog/65x65/thumb1.jpg" class="pull-left" alt="" />
+										<h6><a href="#">Lorem ipsum dolor sit</a></h6>
+										<p>
+											Mazim alienum appellantur eu cu ullum officiis pro pri
+										</p>
+									</li>
+									<li>
+										<a href="#"><img src="img/dummies/blog/65x65/thumb2.jpg" class="pull-left" alt="" /></a>
+										<h6><a href="#">Maiorum ponderum eum</a></h6>
+										<p>
+											Mazim alienum appellantur eu cu ullum officiis pro pri
+										</p>
+									</li>
+									<li>
+										<a href="#"><img src="img/dummies/blog/65x65/thumb3.jpg" class="pull-left" alt="" /></a>
+										<h6><a href="#">Et mei iusto dolorum</a></h6>
+										<p>
+											Mazim alienum appellantur eu cu ullum officiis pro pri
+										</p>
+									</li>
+								</ul>
+							</div>
+							<div class="widget">
+								<h5 class="widgetheading">Etiketler</h5>
+								<ul class="tags">
+									<li><a href="#">Sağlıklı Beslenme</a></li>
+									<li><a href="#">Sağlığımıza Dikkat Edelim</a></li>
+									<li><a href="#">Sağlık Hakkında Herşey</a></li>
+								</ul>
+							</div>
+						</aside>
+					</div>
+					<!--Yan Menü Biriş-->
 @endsection
