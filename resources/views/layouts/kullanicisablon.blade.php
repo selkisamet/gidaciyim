@@ -14,13 +14,6 @@
 	<link id="t-colors" href="{{asset('skins/default.css')}}" rel="stylesheet" />
 </head>
 <body>
-	<div class="top">
-		<div class="container">
-			<div class="pull-right">
-				<a href="/login">Üye Girişi</a> | <a href="/register">Kayıt Ol</a>
-			</div>
-		</div>
-	</div>
 	<div id="wrapper">
 		<!-- Header Başlangıç -->
 		<header>

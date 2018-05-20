@@ -3,9 +3,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>Gıdacıyım</title>
+	<title>{!! config('ayarlar.baslik') !!}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<meta name="description" content="Bootstrap 3 template for corporate business" />
+	<meta name="description" content="{!! config('ayarlar.aciklama') !!}" />
+	<meta name='keywords' content="{!! config('ayarlar.keywords') !!}">
+	<meta name='author' content="{!! config('ayarlar.author') !!}">
 	<!-- Css -->
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
 	<link href="{{asset('plugins/flexslider/flexslider.css')}}" rel="stylesheet" media="screen" />
@@ -14,17 +16,6 @@
 	<link id="t-colors" href="{{asset('skins/default.css')}}" rel="stylesheet" />
 </head>
 <body>
-	<div class="top">
-		<div class="container">
-			<div class="pull-right">
-				@if(Auth::guest())
-				<a href="/login">Üye Girişi</a> | <a href="/register">Kayıt Ol</a>
-				@else
-				<a href="#"><i class="fa fa-user"></i> {{Auth::user()->name}} | </a><a href="/logout"> <i class="fa fa-sign-in"> Çıkış Yap</i></a>
-				@endif
-			</div>
-		</div>
-	</div>
 	<div id="wrapper">
 		<!-- Header Başlangıç -->
 		<header>
@@ -44,13 +35,38 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Kategoriler <i class="fa fa-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="typography.html">Typography</a></li>
-									<li><a href="components.html">Components</a></li>
-									<li><a href="pricing-box.html">Pricing box</a></li>
+									<li><a href="typography.html">Et Ürünleri</a></li>
+									<li><a href="components.html">Sebzeler</a></li>
+									<li><a href="pricing-box.html">Süt Ürünleri</a></li>
 								</ul>
 							</li>
 							<li><a href="Samet.html">Hakkımızda</a></li>
 							<li><a href="contact.html">İletişim</a></li>
+							@if(Auth::guest())
+							<li><a href="/login" class="fa fa-user" style="color: red;"> Üye Girişi</a></li>
+							<li><a href="/register" class="fa fa-sign-in" style="color: red;"> Kayıt Ol</a></li>
+							@else
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">{{ Auth::user()->name }} <i class="fa fa-angle-down"></i></a>
+								<ul class="dropdown-menu">
+									@if(Auth::user()->yetkisi_var_mi('admin'))
+									<li><a href="{{ url('/site-ayarlari') }}">Site Ayarları</a></li>
+									<li><a href="{{ url('/user') }}">Kullanıcılar</a></li>
+									<li><a href="{{ url('/kategori') }}">Kategoriler</a></li>
+									<li><a href="{{ url('/makale') }}">Tüm Makaleler</a></li>
+									<li><a href="{{ url('/talep') }}">Yazarlık Talepleri</a></li>
+									@endif
+									@if(Auth::user()->yetkisi_var_mi('author'))
+									<li><a href="{{ url('/makalem') }}">Yeni Makale Ekle</a></li>
+									<li><a href="{{ url('/makalem/create') }}">Makalelerim</a></li>
+									@endif
+									@if(!Auth::user()->yetkisi_var_mi('admin') && !Auth::user()->yetkisi_var_mi('author'))
+									<li><a href="{{ url('/yazarlik-talebi') }}">Yazarlık Talepleri</a></li>
+									@endif
+									<li><a href="{{ url('/logout') }}">Çıkış</a></li>
+								</ul>
+							</li>
+							@endif
 						</ul>
 					</div>
 				</div>
@@ -155,16 +171,14 @@
 					<div class="row">
 						<div class="col-lg-6">
 							<div class="copyright">
-								<p>&copy; gidaciyim.com - Tüm Hakları Saklıdır</p>
+								<p>{!! config('ayarlar.copyright') !!}</p>
 							</div>
 						</div>
 						<div class="col-lg-6">
 							<ul class="social-network">
-								<li><a href="#" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#" data-placement="top" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-								<li><a href="#" data-placement="top" title="Pinterest"><i class="fa fa-pinterest"></i></a></li>
-								<li><a href="#" data-placement="top" title="Google plus"><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="{!! config('ayarlar.facebook') !!}" data-placement="top" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="{!! config('ayarlar.twitter') !!}" data-placement="top" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="{!! config('ayarlar.github') !!}" data-placement="top" title="Github"><i class="fa fa-github"></i></a></li>
 							</ul>
 						</div>
 					</div>
