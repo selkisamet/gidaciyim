@@ -1,7 +1,6 @@
 @extends('layouts.anasablon')
 @section('icerik')
 <div class="col-lg-8">
-
 						<article>
 							<!-- Flexslider Başlangıç -->
 							<div class="post-slider">
