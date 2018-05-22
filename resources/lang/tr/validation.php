@@ -119,7 +119,8 @@ return [
         'facebook' => 'Facebook',
         'twitter' => 'Twitter',
         'github' => 'Github',
-        'copyright' => 'Copy Right'
+        'copyright' => 'Copy Right',
+        'resim' => 'Resim'
     ],
 
 ];

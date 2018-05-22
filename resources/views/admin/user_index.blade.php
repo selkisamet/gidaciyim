@@ -2,7 +2,7 @@
 @section('icerik')
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading text-center">Kullanıcı Listesi</div>
+                <div class="panel-heading text-center"><i class="fa fa-list"></i> Kullanıcı Listesi</div>
                 <div class="panel-body">
                     <table class="table table-hover table-bordered">
                         <thead>

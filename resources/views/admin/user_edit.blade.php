@@ -2,7 +2,7 @@
 @section('icerik')
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading text-center">Kullanıcı Düzenle</div>
+                <div class="panel-heading text-center"><i class="fa fa-edit"></i> Kullanıcı Düzenle</div>
                 <div class="panel-body">
                     {!! Form::model($user, ['route' => ['user.update', $user->id], 'method' => 'put']) !!}
                     {!! Form::bsCheckbox('rol','Roller',[
