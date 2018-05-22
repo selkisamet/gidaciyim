@@ -14,6 +14,9 @@
 	<link href="{{asset('css/style.css')}}" rel="stylesheet" />
 	<!-- Tema -->
 	<link id="t-colors" href="{{asset('skins/default.css')}}" rel="stylesheet" />
+	<script>
+		window.csrfToken = '{{csrf_token()}}'
+	</script>
 </head>
 <body>
 	<div id="wrapper">
@@ -141,5 +144,6 @@
 	<script src="{{asset('plugins/flexslider/flexslider.config.js')}}"></script>
 	<script src="{{asset('js/jquery.appear.js')}}"></script>
 	<script src="{{asset('js/custom.js')}}"></script>
+	<script src="{{asset('js/laravel-delete.js')}}"></script>
 </body>
 </html>
