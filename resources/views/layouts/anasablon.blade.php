@@ -10,15 +10,24 @@
 	<meta name='author' content="{!! config('ayarlar.author') !!}">
 	<!-- Css -->
 	<link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
+	<link href="{{asset('css/toastr.min.css')}}" rel="stylesheet">
+	<link href="{{asset('css/bootstrap-switch.min.css')}}" rel="stylesheet">
+	<link href="{{asset('vendor/summernote/summernote.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('plugins/flexslider/flexslider.css')}}" rel="stylesheet" media="screen" />
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/css/bootstrap-select.min.css'>
+	<link href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
 	<link href="{{asset('css/style.css')}}" rel="stylesheet" />
 	<!-- Tema -->
 	<link id="t-colors" href="{{asset('skins/default.css')}}" rel="stylesheet" />
+	<link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
+	
 	<script>
 		window.csrfToken = '{{csrf_token()}}'
 	</script>
 </head>
-<body>
+<body data-status="{{Session::get('durum')}}">
 	<div id="wrapper">
 		<!-- Header Başlangıç -->
 		<header>
@@ -60,8 +69,8 @@
 									<li><a href="{{ url('/talep') }}">Yazarlık Talepleri</a></li>
 									@endif
 									@if(Auth::user()->yetkisi_var_mi('author'))
-									<li><a href="{{ url('/makalem') }}">Yeni Makale Ekle</a></li>
-									<li><a href="{{ url('/makalem/create') }}">Makalelerim</a></li>
+									<li><a href="{{ url('/makale/create') }}">Yeni Makale Ekle</a></li>
+									<li><a href="{{ url('/makalem') }}">Makalelerim</a></li>
 									@endif
 									@if(!Auth::user()->yetkisi_var_mi('admin') && !Auth::user()->yetkisi_var_mi('author'))
 									<li><a href="{{ url('/yazarlik-talebi') }}">Yazarlık Talepleri</a></li>
@@ -140,10 +149,15 @@
 
 	<script src="{{asset('js/jquery.min.js')}}"></script>
 	<script src="{{asset('js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('js/toastr.min.js')}}"></script>
+	<script src="{{asset('vendor/summernote/summernote.min.js')}}"></script>
+	<script src="{{asset('vendor/summernote/lang/summernote-tr-TR.js')}}"></script>
 	<script src="{{asset('plugins/flexslider/jquery.flexslider-min.js')}}"></script>
 	<script src="{{asset('plugins/flexslider/flexslider.config.js')}}"></script>
+	<script src="{{asset('js/bootstrap-switch.min.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.2/js/bootstrap-select.min.js"></script>
 	<script src="{{asset('js/jquery.appear.js')}}"></script>
-	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('js/laravel-delete.js')}}"></script>
+	<script src="{{asset('js/custom.js')}}"></script>
 </body>
 </html>

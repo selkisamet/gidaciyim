@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use App\Kategori;
+use App\Makale;
 use App\Resim;
 use Illuminate\Support\Facades\Session;
 
-
-class KategoriController extends Controller
+class MakaleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +21,8 @@ class KategoriController extends Controller
      */
     public function index()
     {
-        $kategoriler = Kategori::paginate(10);
-        return view('admin.kategori_index',compact('kategoriler'));
+        $makaleler  = Makale::paginate(10);
+        return view('admin.makale_index',compact('makaleler'));
     }
 
     /**
@@ -31,7 +32,8 @@ class KategoriController extends Controller
      */
     public function create()
     {
-        return view('admin.kategori_create');
+        $kategoriler = Kategori::lists('baslik','id')->all();
+        return view('admin.makale_create',compact('kategoriler'));
     }
 
     /**
@@ -42,12 +44,18 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[ //Kontrol işlemi yapıyoruz
+        $this->validate($request,[
             'baslik' => 'required|max:255',
-            'resim' => 'required'
+            'resim' => 'required',
+            'kategori_id' => 'required',
+            'icerik' => 'required'
         ]);
 
-        $kategori = Kategori::create($request->all()); //Kategoriler tablosuna kayıt ediyoruz
+        $input = $request->all();
+        $input['user_id'] = Auth::user()->id;
+        $input['durum'] = 0;
+
+        $makale = Makale::create($input);
 
         if($resim = $request->file('resim'))//Eğer resim varsa yani kategori_create sayfasındaki resim değişkeni mevcut ise
         {
@@ -59,13 +67,13 @@ class KategoriController extends Controller
 
             $input = [];//İnput isimli dizi tipinde bir değişken oluşturuyoruz
             $input['isim'] = $resim_isim;
-            $input['imageable_id'] = $kategori->id;
-            $input['imageable_type'] = 'App\Kategori';
+            $input['imageable_id'] = $makale->id;
+            $input['imageable_type'] = 'App\Makale';
 
             Resim::create($input);//$input değişkenine ait tüm verileri resim tablosuna ekliyoruz
         }
         Session::flash("durum",1);
-        return redirect('kategori');
+        return redirect('makale');
     }
 
     /**
@@ -87,8 +95,9 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $kategori = Kategori::find($id);
-        return view('admin.kategori_edit',compact('kategori'));
+        $makale = Makale::find($id);
+        $kategoriler = Kategori::lists('baslik','id')->all();
+        return view('admin.makale_edit',compact('makale','kategoriler'));
     }
 
     /**
@@ -100,23 +109,26 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[ //Kontrol işlemi yapıyoruz
-            'baslik' => 'required|max:255'
+        $this->validate($request,[
+            'baslik' => 'required|max:255',
+            'kategori_id' => 'required',
+            'icerik' => 'required'
         ]);
 
-        $kategori = Kategori::find($id); //Kategoriler tablosunu güncelliyoruz
-        $kategori->update($request->all());
+        $input = $request->all();
+        $makale = Makale::find($id);
+        $makale->update($input);
 
         if($resim = $request->file('resim'))//Eğer resim varsa yani kategori_create sayfasındaki resim değişkeni mevcut ise
         {
-            $resim_isim = $kategori->resim->isim;
-            $thumb = 'thumb_'.$kategori->resim->isim;
+            $resim_isim = $makale->resim->isim;
+            $thumb = 'thumb_'.$makale->resim->isim;
 
             Image::make($resim->getRealPath())->fit(930,460)->fill(array(0,0,0,0.5))->save(public_path('uploads/'.$resim_isim));/*İmage kütüphanesi ile resmi boyutlandırıp üzerine transparan renk ekleyerek kayıt yolunu belirtiyoruz*/
             Image::make($resim->getRealPath())->fit(500,250)->save(public_path('uploads/'.$thumb));
         }
         Session::flash("durum",1);
-        return redirect('kategori');
+        return redirect('makale');
     }
 
     /**
@@ -127,13 +139,22 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        $kategori_resim = Kategori::find($id)->resim->isim;
-        @unlink(public_path('uploads/'.$kategori_resim));
-        @unlink(public_path('uploads/thumb_'.$kategori_resim));
+        $makale_resim = Makale::find($id)->resim->isim;
+        @unlink(public_path('uploads/'.$makale_resim));
+        @unlink(public_path('uploads/thumb_'.$makale_resim));
 
         Resim::where('imageable_id',$id)->where('imageable_type','App\Kategori')->delete();
-        Kategori::destroy($id);
+        Makale::destroy($id);
+
         Session::flash("durum",1);
-        return redirect('/kategori');
+        return redirect('/makale');
+    }
+
+    public function durumDegis(Request $request)
+    {
+        $id = $request->id;
+        $durum = ($request->durum == 'true') ? 1 : 0;
+
+        Makale::find($id)->update(['durum' => $durum]);
     }
 }

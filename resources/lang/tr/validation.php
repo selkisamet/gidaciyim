@@ -120,7 +120,10 @@ return [
         'twitter' => 'Twitter',
         'github' => 'Github',
         'copyright' => 'Copy Right',
-        'resim' => 'Resim'
+        'resim' => 'Resim',
+        'kategori' => 'Kategori',
+        'icerik' => 'İçerik',
+        'kategori_id' => 'Kategori'
     ],
 
 ];

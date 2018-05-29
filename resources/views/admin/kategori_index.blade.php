@@ -6,7 +6,7 @@
                 <div class="panel-body">
                     <div style="margin-bottom: 10px;">
                         <a href="/kategori/create" class="btn btn-success">
-                            <i class="fa fa-plus"></i>Yeni Kategori Ekle
+                            <i class="fa fa-plus"></i> Yeni Kategori Ekle
                         </a>
                     </div>
                     <table class="table table-hover table-bordered">

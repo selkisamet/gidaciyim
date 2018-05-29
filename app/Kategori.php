@@ -24,7 +24,7 @@ class Kategori extends Model
 
     public function resim()
     {
-    	return $this->morphOne('App\Resim','imageable');
+    	return $this->morphOne('App\Resim','imageable');//Kategori ile Reisim modeli arasında polimorfik ilişki kurduk.
     }
 
     public function getKucukResimAttribute()
