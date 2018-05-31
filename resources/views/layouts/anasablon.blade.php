@@ -69,7 +69,7 @@
 									<li><a href="{{ url('/talep') }}">Yazarlık Talepleri</a></li>
 									@endif
 									@if(Auth::user()->yetkisi_var_mi('author'))
-									<li><a href="{{ url('/makale/create') }}">Yeni Makale Ekle</a></li>
+									<li><a href="{{ url('/makalem/create') }}">Yeni Makale Ekle</a></li>
 									<li><a href="{{ url('/makalem') }}">Makalelerim</a></li>
 									@endif
 									@if(!Auth::user()->yetkisi_var_mi('admin') && !Auth::user()->yetkisi_var_mi('author'))

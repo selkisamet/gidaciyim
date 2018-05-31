@@ -30,7 +30,7 @@ $(function(){
             toastr.error('Hata oluştu');
             break;
         case 1 :
-            toastr.success('İşlem başarılı.');
+            toastr.success('İşlem Başarılı.');
             break;
         case 2 :
             toastr.info('İşlem başarılı fakat yönetici onayladıktan sonra aktifleşecektir.');
