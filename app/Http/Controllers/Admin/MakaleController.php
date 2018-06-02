@@ -21,7 +21,7 @@ class MakaleController extends Controller
      */
     public function index()
     {
-        $makaleler  = Makale::paginate(10);
+        $makaleler  = Makale::orderBy('created_at','desc')->paginate(10);
         return view('admin.makale_index',compact('makaleler'));
     }
 

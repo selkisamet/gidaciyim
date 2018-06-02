@@ -39,9 +39,6 @@ $(function(){
         case 3 :
             toastr.warning('Zaten daha önce yazarlık talebinde bulunmuşsunuz.');
             break;
-
-
-
     }
     //
     $('[data-toggle="tooltip"]').tooltip();
