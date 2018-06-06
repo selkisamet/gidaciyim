@@ -16,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        setLocale(LC_TIME,'tr_TR');
+        setlocale(LC_TIME, 'Turkish');
         Carbon::setLocale('tr');
 
-        // config()->set('ayarlar',Ayar::lists('value','name')->all());
+        config()->set('ayarlar',Ayar::lists('value','name')->all());
 
         $this->app['form']->component('bsText', 'form_components.text', ['name', 'label_name', 'value' => null, 'attributes' => []]);  
         $this->app['form']->component('bsPassword', 'form_components.password', ['name', 'label_name', 'attributes' => [] ]);

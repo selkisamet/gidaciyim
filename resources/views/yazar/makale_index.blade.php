@@ -5,8 +5,8 @@
                 <div class="panel-heading text-center"><i class="fa fa-list"></i> Makaleler</div>
                 <div class="panel-body">
                     <div style="margin-bottom: 10px;">
-                        <a href="/makale/create" class="btn btn-success">
-                            <i class="fa fa-edit"></i> Makalelerim
+                        <a href="/makalem/create" class="btn btn-success">
+                            <i class="fa fa-plus"></i> Yeni Makale Ekle
                         </a>
                     </div>
                     <table class="table table-hover table-bordered">

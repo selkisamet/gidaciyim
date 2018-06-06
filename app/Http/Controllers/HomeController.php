@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use Illuminate\Http\Request;
+use App\Makale;
 
 class HomeController extends Controller
 {
@@ -24,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('anasayfa');
+        $makaleler = Makale::where('durum',1)->orderBy('created_at','desc')->paginate(10);
+        return view('anasayfa',compact('makaleler'));
     }
 }

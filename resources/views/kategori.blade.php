@@ -2,29 +2,16 @@
 <!--Sayfa Başlangıcı-->
 <div class="col-lg-8">
     <article>
-        <!-- Flexslider Başlangıç -->
-        <div class="post-slider">
-            <div id="post-slider" class="postslider flexslider">
-                <ul class="slides">
-                    <li>
-                        <img src="img/dummies/blog/img1.jpg" alt="" />
-                    </li>
-                    <li>
-                        <img src="img/dummies/blog/img2.jpg" alt="" />
-                    </li>
-                    <li>
-                        <img src="img/dummies/blog/img3.jpg" alt="" />
-                    </li>
-                </ul>
-            </div>
+        <div class="post-image">
+            <h2>{{$kategori->baslik}} Kategorisindeki Makaleler</h2>
+            <img src="{{asset('uploads/'.$kategori->resim->isim)}}" alt="" class="img-responsive" />
         </div>
-        <!-- Flexslider Bitiş -->
     </article>
     @foreach($makaleler as $makale)
     <article>
         <div class="post-quote">
             <div class="post-heading">
-                <h3><a href="yayinlanan-makale/{{$makale->slug}}">{{$makale->baslik}}</a></h3>
+                <h3><a href="/yayinlanan-makale/{{$makale->slug}}">{{$makale->baslik}}</a></h3>
             </div>
         </div>
         <div class="bottom-article">

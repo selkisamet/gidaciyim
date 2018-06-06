@@ -47,9 +47,9 @@
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle " data-toggle="dropdown" data-hover="dropdown" data-delay="0" data-close-others="false">Kategoriler <i class="fa fa-angle-down"></i></a>
 								<ul class="dropdown-menu">
-									<li><a href="typography.html">Et Ürünleri</a></li>
-									<li><a href="components.html">Sebzeler</a></li>
-									<li><a href="pricing-box.html">Süt Ürünleri</a></li>
+									@foreach(App\Kategori::all() as $kategori)
+									<li><a href="/yayinlanan-kategori/{{$kategori->slug}}">{{$kategori->baslik}}</a></li>
+									@endforeach
 								</ul>
 							</li>
 							<li><a href="Samet.html">Hakkımızda</a></li>

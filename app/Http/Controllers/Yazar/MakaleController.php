@@ -21,7 +21,7 @@ class MakaleController extends Controller
      */
     public function index()
     {
-        $makaleler  = Makale::where('user_id',Auth::user()->id)->paginate(10);
+        $makaleler  = Makale::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->paginate(10);
         return view('yazar.makale_index',compact('makaleler'));
     }
 
@@ -59,8 +59,9 @@ class MakaleController extends Controller
 
         if($resim = $request->file('resim'))//Eğer resim varsa yani kategori_create sayfasındaki resim değişkeni mevcut ise
         {
-            $resim_isim = time().'.'.$resim->getClientOriginalExtension();//Resmin ismini değiştiriyoruz
-            $thumb = 'thumb_'.time().'.'.$resim->getClientOriginalExtension();//Küçük resmin ismini değiştiriyoruz
+            $time = time();
+            $resim_isim = $time.'.'.$resim->getClientOriginalExtension();//Resmin ismini değiştiriyoruz
+            $thumb = 'thumb_'.$time.'.'.$resim->getClientOriginalExtension();//Küçük resmin ismini değiştiriyoruz
 
             Image::make($resim->getRealPath())->fit(930,460)->fill(array(0,0,0,0.5))->save(public_path('uploads/'.$resim_isim));/*İmage kütüphanesi ile resmi boyutlandırıp üzerine transparan renk ekleyerek kayıt yolunu belirtiyoruz*/
             Image::make($resim->getRealPath())->fit(500,250)->save(public_path('uploads/'.$thumb));
@@ -72,7 +73,7 @@ class MakaleController extends Controller
 
             Resim::create($input);//$input değişkenine ait tüm verileri resim tablosuna ekliyoruz
         }
-        Session::flash("durum",1);
+        Session::flash("durum",2);
         return redirect('makalem');
     }
 
@@ -116,6 +117,7 @@ class MakaleController extends Controller
         ]);
 
         $input = $request->all();
+        $input['durum'] = 0;
         $makale = Makale::find($id);
         $makale->update($input);
 
@@ -127,7 +129,7 @@ class MakaleController extends Controller
             Image::make($resim->getRealPath())->fit(930,460)->fill(array(0,0,0,0.5))->save(public_path('uploads/'.$resim_isim));/*İmage kütüphanesi ile resmi boyutlandırıp üzerine transparan renk ekleyerek kayıt yolunu belirtiyoruz*/
             Image::make($resim->getRealPath())->fit(500,250)->save(public_path('uploads/'.$thumb));
         }
-        Session::flash("durum",1);
+        Session::flash("durum",2);
         return redirect('makalem');
     }
 
@@ -143,7 +145,7 @@ class MakaleController extends Controller
         @unlink(public_path('uploads/'.$makale_resim));
         @unlink(public_path('uploads/thumb_'.$makale_resim));
 
-        Resim::where('imageable_id',$id)->where('imageable_type','App\Kategori')->delete();
+        Resim::where('imageable_id',$id)->where('imageable_type','App\Makale')->delete();
         Makale::destroy($id);
 
         Session::flash("durum",1);

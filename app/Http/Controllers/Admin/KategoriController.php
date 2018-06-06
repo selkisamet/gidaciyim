@@ -51,8 +51,9 @@ class KategoriController extends Controller
 
         if($resim = $request->file('resim'))//Eğer resim varsa yani kategori_create sayfasındaki resim değişkeni mevcut ise
         {
-            $resim_isim = time().'.'.$resim->getClientOriginalExtension();//Resmin ismini değiştiriyoruz
-            $thumb = 'thumb_'.time().'.'.$resim->getClientOriginalExtension();//Küçük resmin ismini değiştiriyoruz
+            $time = time();
+            $resim_isim = $time.'.'.$resim->getClientOriginalExtension();//Resmin ismini değiştiriyoruz
+            $thumb = 'thumb_'.$time.'.'.$resim->getClientOriginalExtension();//Küçük resmin ismini değiştiriyoruz
 
             Image::make($resim->getRealPath())->fit(930,460)->fill(array(0,0,0,0.5))->save(public_path('uploads/'.$resim_isim));/*İmage kütüphanesi ile resmi boyutlandırıp üzerine transparan renk ekleyerek kayıt yolunu belirtiyoruz*/
             Image::make($resim->getRealPath())->fit(500,250)->save(public_path('uploads/'.$thumb));
